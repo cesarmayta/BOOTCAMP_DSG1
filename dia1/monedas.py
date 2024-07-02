@@ -4,7 +4,7 @@
 TIPO_CAMBIO_COMPRA = 3.834
 TIPO_CAMBIO_VENTA =  3.851
 opcion = 0
-while(opcion >= 1 and opcion < 3):
+while(opcion != 1 and opcion != 2):
     print(" CONVERTIDOR DE MONEDAS 1.0")
     print("""
         [1] CONVERTIR SOLES A DOLARES
