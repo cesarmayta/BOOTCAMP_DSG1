@@ -44,7 +44,9 @@ while(opcion < 5):
         print("="*ANCHO)
         print(" " * 10 + "[2] MOSTRAR ALUMNOS")
         print("="*ANCHO)
-        print(lista_alumnos)
+        cabeceras = ["NOMBRE","EMAIL","CELULAR"]
+        tabla = [alumno.values() for alumno in lista_alumnos]
+        print(tabulate.tabulate(tabla,headers=cabeceras,tablefmt="grid"))
         input("presione ENTER para continuar...")
     elif(opcion == 3):
         print("="*ANCHO)
