@@ -52,10 +52,43 @@ while(opcion < 5):
         print("="*ANCHO)
         print(" " * 10 + "[3] ACTUALIZAR ALUMNO")
         print("="*ANCHO)
+        valor_busqueda = input('INGRESE EMAIL DEL ALUMNO A ACTUALIZAR :')
+        posicion_busqueda = -1
+        for posicion in range(len(lista_alumnos)):
+            dic_alumno = lista_alumnos[posicion]
+            if valor_busqueda in dic_alumno.values():
+                posicion_busqueda = posicion
+                break
+        if posicion_busqueda == -1:
+            print("NO SE ENCONTRO EL ALUMNO SOLICITADO")
+        else:
+            print(f' ALUMNO A ACTUALIZAR : {lista_alumnos[posicion_busqueda].get("nombre")}')
+            nuevo_nombre = input("NOMBRE : ")
+            nuevo_email = input("EMAIL : ")
+            nuevo_celular = input("CELULAR : ")
+            dic_actualizar_alumno = {
+                'nombre':nuevo_nombre,
+                'email':nuevo_email,
+                'celular':nuevo_celular
+            }
+            lista_alumnos[posicion_busqueda] = dic_actualizar_alumno
+        print("ALUMNO ACTUALIZADO CON EXITO...")
     elif(opcion == 4):
         print("="*ANCHO)
         print(" " * 10 + "[4] ELIMINAR ALUMNO")
         print("="*ANCHO)
+        valor_busqueda = input('INGRESE EMAIL DEL ALUMNO A ELIMINAR :')
+        posicion_busqueda = -1
+        for posicion in range(len(lista_alumnos)):
+            dic_alumno = lista_alumnos[posicion]
+            if valor_busqueda in dic_alumno.values():
+                posicion_busqueda = posicion
+                break
+        if posicion_busqueda == -1:
+            print("NO SE ENCONTRO EL ALUMNO SOLICITADO")
+        else:
+            lista_alumnos.pop(posicion_busqueda)
+            print('ALUMNO ELIMINADO!!!')
     elif(opcion == 5):
         print("="*ANCHO)
         print(" " * 10 + "[5] SALIR")
