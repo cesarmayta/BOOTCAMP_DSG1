@@ -30,10 +30,22 @@ while(opcion < 5):
         print("="*ANCHO)
         print(" " * 10 + "[1] REGISTRAR ALUMNO")
         print("="*ANCHO)
+        nombre = input("NOMBRE : ")
+        email = input("EMAIL : ")
+        celular = input("CELULAR : ")
+        dic_nuevo_alumno = {
+            'nombre':nombre,
+            'email':email,
+            'celular':celular
+        }
+        lista_alumnos.append(dic_nuevo_alumno)
+        print(" ALUMNO REGISTRADO CON EXITO")
     elif(opcion == 2):
         print("="*ANCHO)
         print(" " * 10 + "[2] MOSTRAR ALUMNOS")
         print("="*ANCHO)
+        print(lista_alumnos)
+        input("presione ENTER para continuar...")
     elif(opcion == 3):
         print("="*ANCHO)
         print(" " * 10 + "[3] ACTUALIZAR ALUMNO")
