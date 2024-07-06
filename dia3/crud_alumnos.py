@@ -1,15 +1,13 @@
 import os
 import tabulate
 import time
-from librerias.lib_alumnos import * 
+from librerias.lib_alumnos import buscar_alumno,mostrar_menu,cargar_datos,grabar_datos
 
-lista_alumnos = [
-    {
-        'nombre':'César Mayta',
-        'email':'cesar@gmail.com',
-        'celular':'898989898'
-    }
-]
+f = open('alumnos.txt','r')
+str_alumnos = f.read()
+f.close()
+
+lista_alumnos = cargar_datos(str_alumnos)
 ANCHO = 50
 opcion = 0
 
@@ -75,6 +73,10 @@ while(opcion < 5):
     elif(opcion == 5):
         print("="*ANCHO)
         print(" " * 10 + "[5] SALIR")
+        str_alumnos = grabar_datos(lista_alumnos)
+        fsalida = open('alumnos.txt','w')
+        fsalida.write(str_alumnos)
+        fsalida.close()
         print("="*ANCHO)
     else:
         print("="*ANCHO)
