@@ -14,7 +14,7 @@ for contador in range(1,6):
     nuevo_numero = int(input(f'Ingrese nro {contador} :'))
     numeros.append(nuevo_numero)
 """
-numeros = [10, 13, 15, 1, 5]
+numeros = [10, 13, 15, 15, 5]
 print(numeros)
 numero_mayor = numeros[0]
 
@@ -27,5 +27,6 @@ print(f'El nro mayor es {max(numeros)}')
 print(f'El nro menor es {min(numeros)}')
 
 numeros.sort(reverse=True)
-print(numeros)
+print(numeros[0])
+print(numeros[1])
 
