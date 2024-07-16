@@ -71,6 +71,15 @@ def actualizar_alumno(id,nombre,email,celular):
     cursor.close()
     conexion.close()
 
+def eliminar_alumno(id):
+    conexion = conectar_bd()
+    cursor = conexion.cursor()
+    query = 'DELETE FROM tbl_alumno WHERE id = %s'
+    cursor.execute(query,(id,))
+    conexion.commit()
+    cursor.close()
+    conexion.close()
+
 while(opcion < 5):
     os.system("clear")
     mostrar_menu(ANCHO)
@@ -114,11 +123,11 @@ while(opcion < 5):
         print(" " * 10 + "[4] ELIMINAR ALUMNO")
         print("="*ANCHO)
         valor_busqueda = input('INGRESE EMAIL DEL ALUMNO A ELIMINAR :')
-        posicion_busqueda = buscar_alumno(valor_busqueda,lista_alumnos)
-        if posicion_busqueda == -1:
+        alumno = buscar_alumno(valor_busqueda)
+        if not alumno:
             print("NO SE ENCONTRO EL ALUMNO SOLICITADO")
         else:
-            lista_alumnos.pop(posicion_busqueda)
+            eliminar_alumno(alumno['id'])
             print('ALUMNO ELIMINADO!!!')
     elif(opcion == 5):
         print("="*ANCHO)
