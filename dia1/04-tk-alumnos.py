@@ -24,18 +24,18 @@ class AlumnoTk:
 
         lb_nombre = Label(frame,text='Nombre : ')
         lb_nombre.grid(row=1,column=0)
-        txt_nombre = Entry(frame)
-        txt_nombre.grid(row=1,column=1)
+        self.txt_nombre = Entry(frame)
+        self.txt_nombre.grid(row=1,column=1)
 
         lb_email = Label(frame,text='Email : ')
         lb_email.grid(row=2,column=0)
-        txt_email = Entry(frame)
-        txt_email.grid(row=2,column=1)
+        self.txt_email = Entry(frame)
+        self.txt_email.grid(row=2,column=1)
 
         lb_celular = Label(frame,text='Celular : ')
         lb_celular.grid(row=3,column=0)
-        txt_celular = Entry(frame)
-        txt_celular.grid(row=3,column=1) 
+        self.txt_celular = Entry(frame)
+        self.txt_celular.grid(row=3,column=1) 
 
         btn_insertar = Button(frame,text='Insertar Alumno',command=self.insertar)
         btn_insertar.grid(row=4,column=1,columnspan=2)
@@ -57,9 +57,6 @@ class AlumnoTk:
         self.tree.grid(row=5,column=0,padx=20,pady=20)
         self.cargar_alumnos()
 
-    def insertar(self):
-        pass
-
     def cargar_alumnos(self):
         #limpiar el treeview
         for item in self.tree.get_children():
@@ -69,6 +66,17 @@ class AlumnoTk:
         self.cursor.execute("select id,nombre,email,celular from tbl_alumno")
         for row in self.cursor.fetchall():
             self.tree.insert('',END,iid=row[0],values=row[1:])
+
+    def insertar(self):
+        nuevo_alumno = (
+            self.txt_nombre.get(),
+            self.txt_email.get(),
+            self.txt_celular.get()
+        )
+        query = "insert into tbl_alumno(nombre,email,celular) values(%s,%s,%s)"
+        self.cursor.execute(query,nuevo_alumno)
+        self.db.commit()
+        self.cargar_alumnos()
 
 if __name__ == "__main__":
     app = Tk()
