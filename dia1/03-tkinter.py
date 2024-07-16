@@ -1,8 +1,10 @@
 from tkinter import *
+from tkinter import messagebox
 
 def saludar():
     print("prueba de saludo")
-    
+    messagebox.showinfo("mensaje","Hola " + txt_nombre.get())
+
 #creamos un objeto de la clase Tk()
 app = Tk()
 app.geometry("300x100")
