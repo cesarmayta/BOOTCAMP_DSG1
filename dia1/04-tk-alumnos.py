@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
+from tkinter.ttk import Treeview
+import mysql.connector
 
 class AlumnoTk:
 
@@ -7,6 +9,15 @@ class AlumnoTk:
         self.app = app
         self.app.title('Alumnos')
         self.app.geometry('640x480')
+
+        self.db = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='root',
+            database='db_codigo'
+        )
+
+        self.cursor = self.db.cursor()
 
         frame = LabelFrame(self.app,text='Nuevo Alumno')
         frame.grid(row=0,column=0,columnspan=2,pady=10,padx=10)
@@ -29,8 +40,35 @@ class AlumnoTk:
         btn_insertar = Button(frame,text='Insertar Alumno',command=self.insertar)
         btn_insertar.grid(row=4,column=1,columnspan=2)
 
+        #grilla de alumnos
+        self.tree = Treeview(self.app)
+        self.tree['columns'] = ('Nombre','Email','Celular')
+
+        self.tree.column('#0',width=0,stretch=NO)
+        self.tree.column('Nombre')
+        self.tree.column('Email')
+        self.tree.column('Celular')
+
+        self.tree.heading('#0',text='id')
+        self.tree.heading('Nombre',text='Nombre')
+        self.tree.heading('Email',text='Email')
+        self.tree.heading('Celular',text='Celular')
+
+        self.tree.grid(row=5,column=0,padx=20,pady=20)
+        self.cargar_alumnos()
+
     def insertar(self):
         pass
+
+    def cargar_alumnos(self):
+        #limpiar el treeview
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+
+        #cargar alumnos
+        self.cursor.execute("select id,nombre,email,celular from tbl_alumno")
+        for row in self.cursor.fetchall():
+            self.tree.insert('',END,iid=row[0],values=row[1:])
 
 if __name__ == "__main__":
     app = Tk()
