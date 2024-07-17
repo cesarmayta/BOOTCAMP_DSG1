@@ -15,3 +15,14 @@ class ClienteDAO(DAO):
         """
         self.cursor.execute(query_create)
         self.db.commit()
+
+    def insertar(self,cliente):
+        nuevo_cliente = (
+            cliente.ruc,
+            cliente.razon_social,
+            cliente.direccion,
+            cliente.linea_credito
+        )
+        query = "insert into tbl_cliente(ruc,razon_social,direccion,linea_credito) values(%s,%s,%s,%s)"
+        self.cursor.execute(query,nuevo_cliente)
+        self.db.commit()

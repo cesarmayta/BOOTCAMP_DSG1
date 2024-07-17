@@ -8,5 +8,7 @@ cliente1.mostrar()
 proveedor1.mostrar()
 
 dao_cliente = ClienteDAO()
+dao_cliente.insertar(cliente1)
+print("cliente registrado")
 
 
