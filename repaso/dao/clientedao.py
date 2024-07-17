@@ -21,8 +21,11 @@ class ClienteDAO(DAO):
             cliente.ruc,
             cliente.razon_social,
             cliente.direccion,
-            cliente.linea_credito
         )
-        query = "insert into tbl_cliente(ruc,razon_social,direccion,linea_credito) values(%s,%s,%s,%s)"
+        query = "insert into tbl_cliente(ruc,razon_social,direccion) values(%s,%s,%s)"
         self.cursor.execute(query,nuevo_cliente)
         self.db.commit()
+
+    def consultar(self):
+        self.cursor.execute("select id,razon_social,ruc,direccion from tbl_cliente")
+        return self.cursor.fetchall()

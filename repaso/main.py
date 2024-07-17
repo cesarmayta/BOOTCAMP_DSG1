@@ -1,4 +1,4 @@
-from models.proveedor import Proveedor
+"""from models.proveedor import Proveedor
 from models.cliente import Cliente
 from dao.clientedao import ClienteDAO
 
@@ -9,6 +9,13 @@ proveedor1.mostrar()
 
 dao_cliente = ClienteDAO()
 dao_cliente.insertar(cliente1)
-print("cliente registrado")
+print("cliente registrado")"""
+from tkinter import *
+from tkviews.clientetk import ClienteTk
+
+if __name__ == "__main__":
+    app = Tk()
+    app_cliente = ClienteTk(app)
+    app.mainloop()
 
 
