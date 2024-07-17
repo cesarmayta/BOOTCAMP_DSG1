@@ -1,4 +1,4 @@
-from empresa import Empresa
+from .empresa import Empresa
 
 class Cliente(Empresa):
     

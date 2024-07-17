@@ -1,4 +1,4 @@
-from empresa import Empresa
+from .empresa import Empresa
 
 class Proveedor(Empresa):
     def __init__(self,ruc,rs,dir,cont):
