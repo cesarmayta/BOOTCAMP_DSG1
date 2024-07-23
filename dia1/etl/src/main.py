@@ -9,9 +9,11 @@ from tasks.task_load_offers import (
 @flow(name="PRIMER FLOW")
 def main_flow():
     #task_primera_tarea()
-    offers = task_extract_linkedin('java')
-    print(f"se encontraron {offers.__len__()} ofertas")
-    task_load_offers(offers)
+    search = ['python','java','go']
+    for s in search:
+        offers = task_extract_linkedin(s)
+        print(f"se encontraron {offers.__len__()} ofertas de {s}")
+        task_load_offers(offers)
     
 if __name__ == "__main__":
     main_flow()
