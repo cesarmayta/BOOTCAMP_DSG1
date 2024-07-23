@@ -7,9 +7,9 @@ from tasks.task_load_offers import (
     task_load_offers_update
 )
 
-TYPE_TASK = 'update'
+TYPE_TASK = 'baseline'
 
-@flow(name="PRIMER FLOW")
+@flow(name="ETL DE OFERTAS LABORALES")
 def main_flow():
     #task_primera_tarea()
     search = ['python']
