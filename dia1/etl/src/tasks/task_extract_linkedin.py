@@ -17,8 +17,7 @@ def task_extract_linkedin(skill):
         for offer in li_offers:
             offer_title = offer.find('h3',{'class':'base-search-card__title'})
             offer_location = offer.find('span',{'class':'job-search-card__location'})
-            #offer_url = offer.find('a')
-            offer_url =  offer.find('a',{'class':'base-card__full-link absolute top-0 right-0 bottom-0 left-0 p-0 z-[2]'})
+            offer_url = offer.find('a')
             offer_company = offer.find('a',{'class':'hidden-nested-link'})
             offer_date = offer.find('time',{'class':'job-search-card__listdate'})
             title = offer_title.get_text().strip() if offer_title else ''
