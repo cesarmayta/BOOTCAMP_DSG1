@@ -3,7 +3,7 @@ from tasks.task import (task_primera_tarea)
 from tasks.task_extract_linkedin import (
     task_extract_linkedin)
 from tasks.task_load_offers import (
-    task_load_offers
+    task_load_offers_baseline
 )
 
 @flow(name="PRIMER FLOW")
@@ -12,8 +12,11 @@ def main_flow():
     search = ['python','java','go']
     for s in search:
         offers = task_extract_linkedin(s)
-        print(f"se encontraron {offers.__len__()} ofertas de {s}")
-        task_load_offers(offers)
+        if offers:
+            print(f"se encontraron {offers.__len__()} ofertas de {s}")
+            task_load_offers_baseline(offers)
+        else:
+            print(f'No se encontraron ofertas para {s}')
     
 if __name__ == "__main__":
     main_flow()

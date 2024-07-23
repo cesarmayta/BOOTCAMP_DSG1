@@ -14,21 +14,23 @@ def task_extract_linkedin(skill):
         li_offers = ul_offers.find_all('li')
 
         offer_list = []
-        
         for offer in li_offers:
             offer_title = offer.find('h3',{'class':'base-search-card__title'})
             offer_location = offer.find('span',{'class':'job-search-card__location'})
-            offer_url = offer.find('a')
+            #offer_url = offer.find('a')
+            offer_url =  offer.find('a',{'class':'base-card__full-link absolute top-0 right-0 bottom-0 left-0 p-0 z-[2]'})
             offer_company = offer.find('a',{'class':'hidden-nested-link'})
             offer_date = offer.find('time',{'class':'job-search-card__listdate'})
-            
             title = offer_title.get_text().strip() if offer_title else ''
             location = offer_location.get_text().strip() if offer_location else ''
-            url_value = offer_url['href'].strip() if offer_url else ''
             company = offer_company.get_text().strip() if offer_company else ''
             date_value = offer_date['datetime'].strip() if offer_date else None
-
-            offer_list.append((title,location,company,date_value,url_value,skill))
+            url_value = offer_url['href'].strip() if offer_url else ''
+            if url_value != '':
+                code = url_value.split('?')[0].split('-')[-1]
+            else:
+                code = 'NN'
+            offer_list.append((code,title,location,company,date_value,url_value,skill))
             
         return offer_list
     else:

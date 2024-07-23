@@ -3,7 +3,7 @@ from prefect import task
 
 
 @task(name='Cargar ofertas en bd')
-def task_load_offers(offers):
+def task_load_offers_baseline(offers):
     try:
         conn = mysql.connector.connect(
             user='root',
@@ -13,9 +13,14 @@ def task_load_offers(offers):
         )
         cursor = conn.cursor()
 
+        query_drop = "drop table if exists tbl_oferta"
+        cursor.execute(query_drop)
+        conn.commit()
+
         query_table = """
         create table if not exists tbl_oferta(
         id INT AUTO_INCREMENT PRIMARY KEY,
+        codigo VARCHAR(255),
         titulo VARCHAR(255),
         ubicacion VARCHAR(255),
         empresa VARCHAR(255),
@@ -28,8 +33,8 @@ def task_load_offers(offers):
         conn.commit()
 
         query_insert = """
-        insert into tbl_oferta(titulo,ubicacion,empresa,fecha,url,skill)
-        values(%s,%s,%s,%s,%s,%s)
+        insert into tbl_oferta(codigo,titulo,ubicacion,empresa,fecha,url,skill)
+        values(%s,%s,%s,%s,%s,%s,%s)
         """
 
         for offer in offers:
