@@ -5,7 +5,7 @@ from tasks.task_extract import(
 
 @flow(name='ETL APIPERU')
 def main_flow():
-    dnis = ['41776223','41273345']
+    dnis = ['41273345']
     for dni in dnis:
         data_dnis = task_extract_dni(dni)
         print(data_dnis)
