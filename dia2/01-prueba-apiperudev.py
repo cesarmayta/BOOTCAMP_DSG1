@@ -1,6 +1,8 @@
 import requests
+import os
+from decouple import config
 
-token = ""
+token = config('API_TOKEN')
 url_dni = 'https://apiperu.dev/api/dni'
 
 dni = input("ingrese dni :")
@@ -10,7 +12,7 @@ data_request = {
 }
 
 headers_request = {
-    "Authorization": "Bearer " + token,
+    "Authorization": "Bearer " + str(token),
     "Content-Type": "application/json"
 }
 
