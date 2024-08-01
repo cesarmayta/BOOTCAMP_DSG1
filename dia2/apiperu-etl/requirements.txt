@@ -1,4 +1,0 @@
-requests
-python-decouple
-prefect
-mysql-connector-python
